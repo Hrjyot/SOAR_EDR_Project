@@ -25,51 +25,60 @@ LaZagne: Credential dumping tool used for testing (MITRE ATT&CK T1003: OS Creden
 Step 1: Project Planning
 Created a workflow diagram to outline the end-to-end process from detection to response.
 
-<img width="834" height="807" alt="image" src="https://github.com/user-attachments/assets/d56b10ed-70ed-4e62-9b50-c23718fd0814" />
+<img width="834" height="807" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/fafcb2fd-1aeb-493d-9fba-84aba645097e" />
+
 
 ​
 
 Step 2: Endpoint Setup
 Deployed a Windows 11 VM on Vultr with RDP enabled and firewall rules allowing LimaCharlie/RDP traffic. Applied basic hardening for realistic testing.
 
-<img width="1552" height="709" alt="image" src="https://github.com/user-attachments/assets/715853bd-127b-4c0c-977d-2d0619e9724f" />
+<img width="1552" height="709" alt="2026-01-09T18_52_53" src="https://github.com/user-attachments/assets/85b56ae8-add5-464a-9623-98384d2d8250" />
+
 
 ​
 
 Step 3: LimaCharlie Agent Deployment
 Installed the LimaCharlie agent on the VM to enable telemetry ingestion and add it to the organization's sensors.
 ​
-<img width="1108" height="581" alt="image" src="https://github.com/user-attachments/assets/6f735da8-18ed-485d-9c5f-0c927c1ceba1" />
+<img width="1108" height="581" alt="2026-01-09T18_51_54" src="https://github.com/user-attachments/assets/f678ae5d-b9fd-4594-934b-e7d3dcbdcf0a" />
 
-<img width="1161" height="704" alt="image" src="https://github.com/user-attachments/assets/d9741d80-f2d8-4194-8c45-81f91e5858ee" />
+
+<img width="1279" height="710" alt="2026-01-12T15_27_08" src="https://github.com/user-attachments/assets/e7ab20e3-757f-4f0a-a552-396642255b5b" />
+
 
 ​
 
 Downloaded and executed LaZagne.exe to generate test events.
 
-<img width="995" height="833" alt="image" src="https://github.com/user-attachments/assets/00915072-33a6-4378-9bda-ace73587299d" />
+<img width="995" height="833" alt="2026-01-12T15_45_57" src="https://github.com/user-attachments/assets/c58de5d3-3b23-49b8-9bac-76c14582c6f2" />
+
 
 ​
 
 Step 4: Custom Detection Rule
 Authored a YAML detection rule targeting lazagne.exe processes for credential access attempts. Tested the rule in LimaCharlie's console before deployment.
 
-<img width="1203" height="863" alt="image" src="https://github.com/user-attachments/assets/df957130-e471-4729-adec-5b2cb00e7521" />
+<img width="1191" height="733" alt="2026-01-12T16_10_24" src="https://github.com/user-attachments/assets/38d47dfa-b17d-4c9b-b23c-5fe763d47e5b" />
+
 
 ​​
 
 Re-executed LaZagne to trigger the live detection.
 
-<img width="1521" height="779" alt="image" src="https://github.com/user-attachments/assets/541b8152-05fa-4d12-aed3-216017df193e" />
+<img width="1612" height="841" alt="2026-01-12T16_14_35" src="https://github.com/user-attachments/assets/03b766b4-e966-4644-82d4-99a94bc70501" />
+
 
 ​
 
 Step 5: Tines Slack Alerts
 Tines Story 1: Configured a workflow to receive LimaCharlie webhooks, extract key details (e.g., endpoint ID, detection name, timestamp), and post formatted alerts to Slack.
 
-<img width="1184" height="617" alt="image" src="https://github.com/user-attachments/assets/d7673ff5-7f77-44b2-9ca3-19f9076efa72" />
+<img width="1184" height="617" alt="2026-01-12T20_09_21" src="https://github.com/user-attachments/assets/69022d5f-8da1-4077-9373-1b5816f3a6d3" />
 
-<img width="1456" height="388" alt="image" src="https://github.com/user-attachments/assets/bfb868a3-9856-488e-bd09-491bbd06c042" />
+
+<img width="1456" height="388" alt="2026-01-12T19_58_04" src="https://github.com/user-attachments/assets/f44871e0-c1b4-481b-af72-344c00ccf65f" />
+
 
 
 ​
@@ -78,16 +87,19 @@ Tines Story 1: Configured a workflow to receive LimaCharlie webhooks, extract ke
 Step 6: Analyst Approval
 Tines Story 2: Built an interactive form for analysts to review alerts and approve actions like isolation.
 
-<img width="577" height="523" alt="image" src="https://github.com/user-attachments/assets/745b81c0-997d-44d5-a701-6655a0cc2e56" />
+<img width="577" height="523" alt="2026-01-12T19_53_59" src="https://github.com/user-attachments/assets/b8e6bc45-6499-4675-88ed-10da2d1f1c6c" />
+
 
 ​
 
 Step 7: Automated Isolation
 Upon approval, Tines called the LimaCharlie API to isolate the endpoint. Verified success with ping tests showing 100% packet loss to external hosts like google.com.
 
-<img width="410" height="287" alt="image" src="https://github.com/user-attachments/assets/07133aed-373d-4e24-93c1-e9284265f95a" />
+<img width="410" height="287" alt="2026-01-12T19_55_14" src="https://github.com/user-attachments/assets/17003cf7-93ec-40da-b6df-bc37fdcfca8e" />
 
-<img width="597" height="237" alt="image" src="https://github.com/user-attachments/assets/a601e1b2-def7-425a-af06-609313944723" />
+
+<img width="597" height="237" alt="2026-01-12T19_57_52" src="https://github.com/user-attachments/assets/03b89216-cc26-4b4c-8d8a-ce6f3bb1f31a" />
+
 ​
 ​
 
